@@ -1,7 +1,21 @@
 using UnityEngine;
 
+
 public class TextBasedAdventure : MonoBehaviour
 {
+    [System.Serializable]
+    public struct Room
+    {
+        public string Name;
+        public TileType Type;
+    }
+
+    [System.Serializable]
+    public struct RoomRow
+    {
+        public Room[] rooms;
+    }
+
     public enum TileType
     {
         Invalid,
@@ -10,6 +24,17 @@ public class TextBasedAdventure : MonoBehaviour
         Enemy,
         Exit,
     }
+
+    private Room[,] dungeon = { 
+                                {   new Room { Name = "Dark Cave",    Type = TileType.Empty},
+                                    new Room { Name = "Mossy Tunnel", Type = TileType.Item},
+                                    new Room { Name = "Crystal Room", Type = TileType.Empty} },
+                                
+                                {   new Room { Name = "Bone Chamber", Type = TileType.Enemy },
+                                    new Room { Name = "Flooded Hall", Type = TileType.Empty},
+                                    new Room { Name = "Iron Gate",    Type = TileType.Exit } }
+                              };
+    
 
     private string[,] tileNames = { { "Dark Cave"   /* 0,0 */,  "Mossy Tunnel" /* 0,1 */,   "Crystal Room" /* 0,2 */ },
                                     { "Bone Chamber"/* 1,0 */,  "Flooded Hall" /* 1,1 */,   "Iron Gate"              },
@@ -27,10 +52,13 @@ public class TextBasedAdventure : MonoBehaviour
     private int enemyDamage = 1;
     private int itemHealAmount = 2;
 
+    private Rigidbody rb;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         OutputTileInformation();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame

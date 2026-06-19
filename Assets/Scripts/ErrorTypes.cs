@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ErrorTypes : MonoBehaviour
 {
-    private GameObject _obj;
-    private Rigidbody _body;
-    private int[] _data = { 10, 20, 30 };
+    private GameObject testGameObject;
+    private Rigidbody testRigidBody;
+    private int[] testArray = { 10, 20, 30 };
     private List<string> _items = new List<string> { "A", "B" };
     private object _value = "hello";
 
@@ -32,7 +32,7 @@ public class ErrorTypes : MonoBehaviour
     // Error: _______________________________________________
     private void Method01()
     {
-        Debug.Log(_obj.name);
+        Debug.Log(testGameObject.name);
     }
 
     // Error: _______________________________________________
@@ -46,7 +46,7 @@ public class ErrorTypes : MonoBehaviour
     // Error: _______________________________________________
     private void Method03()
     {
-        int x = _data[5];
+        int x = testArray[5];
         Debug.Log(x);
     }
 
@@ -99,8 +99,8 @@ public class ErrorTypes : MonoBehaviour
     // Error: _______________________________________________
     private void Method10()
     {
-        _body = GetComponent<Rigidbody>();
-        _body.AddForce(Vector3.up);
+        testRigidBody = GetComponent<Rigidbody>();
+        testRigidBody.AddForce(Vector3.up);
     }
 
     // Error: _______________________________________________
@@ -139,7 +139,7 @@ public class ErrorTypes : MonoBehaviour
     // Error: _______________________________________________
     private void Update()
     {
-        string text = "Value: " + _data[0].ToString();
+        string text = "Value: " + testArray[0].ToString();
         Debug.Log(text);
     }
 
