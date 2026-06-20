@@ -36,15 +36,6 @@ public class TextBasedAdventure : MonoBehaviour
                               };
     
 
-    private string[,] tileNames = { { "Dark Cave"   /* 0,0 */,  "Mossy Tunnel" /* 0,1 */,   "Crystal Room" /* 0,2 */ },
-                                    { "Bone Chamber"/* 1,0 */,  "Flooded Hall" /* 1,1 */,   "Iron Gate"              },
-                                    { "Goblin Den",             "Armory",                   "Throne Room"            }
-                                    };
-
-    private TileType[,] tileTypes = {   { TileType.Empty, TileType.Item,  TileType.Empty},
-                                        { TileType.Enemy, TileType.Empty, TileType.Exit },
-                                        { TileType.Empty, TileType.Enemy, TileType.Item }
-                                    };
 
     private int playerRow = 0;
     private int playerCol = 0;
@@ -75,9 +66,9 @@ public class TextBasedAdventure : MonoBehaviour
 
     private void OutputTileInformation()
     {
-        Debug.Log("You are in: " + tileNames[playerRow, playerCol]);
+        Debug.Log("You are in: " + dungeon[playerRow, playerCol].Name);
 
-        switch (tileTypes[playerRow, playerCol])
+        switch (dungeon[playerRow, playerCol].Type)
         {
             case TileType.Empty:
                 Debug.Log("There is nothing here.");
@@ -152,7 +143,7 @@ public class TextBasedAdventure : MonoBehaviour
     /// <returns>True if it is within the bounds, false if not</returns>
     private bool CheckIfNewPositionInTileBounds(int newRow, int newCol)
     {
-        return (newRow >= 0 && newRow < tileNames.GetLength(0)) && (newCol >= 0 && newCol < tileNames.GetLength(1));
+        return (newRow >= 0 && newRow < dungeon.GetLength(0)) && (newCol >= 0 && newCol < dungeon.GetLength(1));
     }
 
     /// <summary>
